@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html class="background">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+                <div class="nav">
+                    <div class="logo">
+                            <a href="/malana/Malana/public/index.php/inicio"><img src="{{ asset('images/logoblanco.png') }}" alt="Logo" class="logo-img"></a>
+                    </div>
+                    <div class="container">
+                        <a class="btn" href="/malana/Malana/public/index.php/inicio">Inicio</a>
+                        <div class="btn">Catálogo</div>
+                        <a class="btn" href="/malana/Malana/public/index.php/register">Register</a>
+                        <a class="btn"
+                                 href="/{{app.user ? 'malana/Malana/public/index.php/logout' : 'malana/Malana/public/index.php/login'}}"
+                                 @click="isOpen = false">
+                                 {{app.user ? 'Logout' : 'Login'}} </a>
+                            <svg
+                                class="outline"
+                                overflow="visible"
+                                width="500"
+                                height="70"
+                                viewBox="0 20 420 60"
+                                xmlns="http://www.w3.org/2000/svg"
+                                >
+                                <rect
+                                    class="rect"
+                                    pathLength="100"
+                                    x="0"
+                                    y="0"
+                                    width="400"
+                                    height="60"
+                                    fill="transparent"
+                                    stroke-width="5"
+                                ></rect>
+                            </svg>
+                        </div>
+                    </div>
+                <div class="example-wrapper">
+                            {% if app.user %}
+                                <h1>Bienvenido {{ app.user.email }}!! ✅</h1>
+                            {% else %}
+                                <h1>Sesión cerrada ❌</h1>
+                            {% endif %}
+                </div>
+        </header>
+        {% block body %}{% endblock %}
+    </body>
+</html>
